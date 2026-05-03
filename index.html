@@ -5,54 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Coming Soon</title>
   <style>
-    /* Totální reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    /* Reset všeho */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Zajistíme, že základní kontejnery nekladou odpor */
+    /* Klíč k úspěchu: Body musí být fixní a zabírat absolutně vše */
     html, body {
       width: 100%;
       height: 100%;
-      background-color: #0c0c0e; /* Nebo barva tvého obrázku */
       overflow: hidden;
+      background-color: #f7e6c9; /* Barva z obrázku - pojistka proti černým pruhům */
     }
 
-    /* Vytvoříme vrstvu, která ignoruje Safe Area */
-    .fullscreen-bg {
+    .bg-image {
       position: fixed;
-      /* Místo inset: 0 použijeme záporné hodnoty, pokud by telefon stále stávkoval, 
-         ale s viewport-fit=cover by měly stačit nuly */
+      /* Tyto 4 nuly spolu s viewport-fit=cover roztáhnou img přes notch i lištu */
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      
-      /* Použití vh/vw jednotek, které ignorují UI prohlížeče */
       width: 100vw;
-      height: 100dvh;
+      height: 100dvh; 
       
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -1;
+      /* Object-fit zajistí, že se obrázek nepomačká, ale ořízne jako pozadí */
+      object-fit: cover;
+      object-position: center;
+      
+      z-index: 1;
     }
 
-    /* Obrázky na pozadí */
-    .fullscreen-bg {
-      background-image: url('desktop.png');
-    }
+    .img-desktop { display: block; }
+    .img-mobile  { display: none; }
 
     @media (max-width: 768px) {
-      .fullscreen-bg {
-        background-image: url('mobile.png');
-      }
+      .img-desktop { display: none; }
+      .img-mobile  { display: block; }
     }
   </style>
 </head>
 <body>
-  <div class="fullscreen-bg"></div>
+
+  <img src="desktop.png" class="bg-image img-desktop" alt="Background">
+  <img src="mobile.png"  class="bg-image img-mobile"  alt="Background">
+
 </body>
 </html>
