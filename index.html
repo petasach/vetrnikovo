@@ -2,75 +2,39 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <!-- 1. viewport-fit=cover je nutné a máš ho správně. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Větrníkovo - Již brzy</title>
+  <title>Coming Soon</title>
   <style>
-    /* 1. Globální reset (máš už v kódu) */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* 2. Zásadní krok: Donutit HTML a BODY zaplnit celou výšku a šířku displeje, včetně bezpečných zón. */
     html, body {
-      height: 100dvh; /* Dynamická výška viewportu pro mobily - nejdůležitější */
       width: 100vw;
-      overflow: hidden; /* Pokud nechceš rolování */
+      height: 100vh;  /* Fallback */
+      height: 100dvh; /* Moderní jednotka pro mobily (řeší černé okraje) */
+      overflow: hidden;
     }
 
-    /* 3. Aplikovat pozadí přímo na BODY, aby se roztáhlo všude. */
     body {
-      background-color: #f7e6c9; /* Kakaová/béžová barva z tvého obrázku */
-      
-      /* Použij svůj obrázek se vzorem jako pozadí. */
-      background-image: url('mobil-pattern.png'); /* Tvůj obrázek s opakujícím se vzorem pastřiček */
-      background-repeat: repeat; /* Pro opakovaný vzor */
+      /* Výchozí obrázek pro desktop */
+      background-image: url('desktop.png');
+      background-size: cover;
       background-position: center;
-      
-      /* Pokud bys chtěl jeden velký obrázek roztáhnout přes celé, použij: */
-      /* background-size: cover; */
-
-      /* 4. Stylování obsahu (textů) pro vystředění */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      
-      /* Použij písma a barvy podle tvého návrhu */
-      color: white; 
-      font-family: 'Times New Roman', Times, serif; /* Příklad, použij své serif písmo */
-      padding: 10%; /* Odsazení od krajů */
+      background-repeat: no-repeat;
     }
 
-    /* 5. Stylování konkrétních textů pro věrnou rekonstrukci z obrázku */
-    h1 {
-      font-size: 2.5rem;
-      font-weight: normal;
-      margin-bottom: 0.5rem;
-      font-style: italic; /* pro "již brzy" */
-    }
-
-    h2 {
-      font-size: 4rem; /* Větší, ozdobnější a kurzivní */
-      font-family: 'Cursive', cursive; /* Příklad kurzivního písma, použij své ozdobné */
-      font-weight: normal;
-    }
-
-    /* Media query pro desktop (volitelné) */
-    @media (min-width: 769px) {
-      /* Můžeš změnit pozadí na desktopovou verzi, pokud máš */
-      /* body { background-image: url('desktop-pattern.png'); } */
-      h1 { font-size: 3.5rem; }
-      h2 { font-size: 5rem; }
+    /* Přepnutí na mobilní obrázek na menších obrazovkách */
+    @media (max-width: 768px) {
+      body {
+        background-image: url('mobile.png');
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Textové prvky jsou přímo v body a jsou vystředěny pomocí CSS -->
-  <h1>již brzy</h1>
-  <h2>větrníkovo</h2>
+  <!-- Žádný obsah, vše je řešeno přes pozadí v CSS -->
 </body>
 </html>
