@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0c0c0e;
+    }
+
+    .scene {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Desktop image: visible by default */
+    .img-desktop { display: block; }
+    .img-mobile  { display: none;  }
+
+    /* Switch at 768 px — typical mobile breakpoint */
+    @media (max-width: 768px) {
+      .img-desktop { display: none;  }
+      .img-mobile  { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <!-- Desktop (landscape 16:9 – 1920×1080) -->
+    <img
+      class="img-desktop"
+      src="desktop.png"
+      alt="Coming Soon"
+      width="1920"
+      height="1080"
+    />
+
+    <!-- Mobile (portrait 9:16 – 1080×1920) -->
+    <img
+      class="img-mobile"
+      src="mobile.png"
+      alt="Coming Soon"
+      width="1080"
+      height="1920"
+    />
+  </div>
+</body>
+</html>
