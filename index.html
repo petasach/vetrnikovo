@@ -1,53 +1,184 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Větrníkovo</title>
-  <style>
-    /* Reset všeho */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Klíč k úspěchu: Body musí být fixní a zabírat absolutně vše */
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #fbebca; /* Barva z obrázku - pojistka proti černým pruhům */
-    }
-
-    .bg-image {
-      position: fixed;
-      /* Tyto 4 nuly spolu s viewport-fit=cover roztáhnou img přes notch i lištu */
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100dvh; 
-      
-      /* Object-fit zajistí, že se obrázek nepomačká, ale ořízne jako pozadí */
-      object-fit: cover;
-      object-position: center;
-      
-      z-index: 1;
-    }
-
-    .img-desktop { display: block; }
-    .img-mobile  { display: none; }
-
-    @media (max-width: 768px) {
-      .img-desktop { display: none; }
-      .img-mobile  { display: block; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Větrníkovo</title>
+    <meta name="description" content="Větrníkovo – domácí větrníky a cukrářské speciality">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Abhaya+Libre:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="photos/logo-white.png">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <img src="desktop.png" class="bg-image img-desktop" alt="Background">
-  <img src="mobile.png"  class="bg-image img-mobile"  alt="Background">
+    <!-- Top bar -->
+    <header class="top-bar" id="top-bar">
+        <div class="top-bar__spacer"></div>
+        <a href="#" class="top-bar__logo">
+            <img src="photos/vetrnikovo-white.png" alt="Větrníkovo logo" class="top-bar__logo-img">
+        </a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Otevřít menu" aria-expanded="false">
+            <img src="photos/logo-white.png" alt="Menu" class="hamburger__icon">
+        </button>
+    </header>
+
+    <!-- Overlay -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Slide-in menu -->
+    <nav class="slide-menu" id="slide-menu" aria-label="Hlavní navigace">
+        <button class="slide-menu__close" id="menu-close-btn" aria-label="Zavřít menu">
+            <span>&times;</span>
+        </button>
+        <ul class="slide-menu__list">
+            <li class="slide-menu__item"><a href="index.html" class="slide-menu__link">Úvod</a></li>
+            <li class="slide-menu__item"><a href="#eventy" class="slide-menu__link">Eventy</a></li>
+            <li class="slide-menu__item"><a href="o-nas.html" class="slide-menu__link">O nás</a></li>
+            <li class="slide-menu__item"><a href="#kontakt" class="slide-menu__link">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero section -->
+    <section class="hero" id="hero">
+        <img src="photos/logo-hero.png" alt="Větrníkovo logo" class="hero__logo">
+    </section>
+
+    <!-- Ticker strip -->
+    <div class="ticker" aria-label="Brzy otevíráme">
+        <div class="ticker__track">
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+            <span class="ticker__text">BRZY OTEVÍRÁME</span>
+        </div>
+    </div>
+
+    <!-- Eventy & O nás section -->
+    <section class="duo-section" id="eventy">
+        <!-- Row 1: Text left, Image right -->
+        <div class="duo-section__row">
+            <div class="duo-section__text">
+                <img src="photos/logo-yellow-light.png" alt="" class="duo-section__bg-logo duo-section__bg-logo--eventy"
+                    aria-hidden="true">
+                <h2 class="duo-section__title">Eventy</h2>
+                <p class="duo-section__subtitle">Občerstvení pro každou příležitost. Ať už plánujete svatbu, firemní
+                    večírek nebo rodinnou oslavu, jsme tu pro Vás.</p>
+                <a href="#kontakt" class="duo-section__btn">Ozvěte se nám</a>
+            </div>
+            <div class="duo-section__image">
+                <img src="photos/foto1.jpg" alt="Eventy" loading="lazy">
+            </div>
+        </div>
+        <!-- Row 2: Image left, Text right -->
+        <div class="duo-section__row duo-section__row--reversed">
+            <div class="duo-section__image">
+                <img src="photos/foto2.jpg" alt="O nás" loading="lazy">
+            </div>
+            <div class="duo-section__text">
+                <img src="photos/logo-yellow-light.png" alt="" class="duo-section__bg-logo duo-section__bg-logo--onas"
+                    aria-hidden="true">
+                <h2 class="duo-section__title">O nás</h2>
+                <p class="duo-section__subtitle">Moderní bistro-cukrárna v pražských Holešovicích. Pečeme pro vás od
+                    roku 2026.
+                </p>
+                <a href="o-nas.html" class="duo-section__btn">Náš příběh</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact section -->
+    <section class="contact" id="kontakt">
+        <div class="contact__inner">
+            <div class="contact__info">
+                <h2 class="contact__title">Kontakt</h2>
+
+                <div class="contact__block">
+                    <h3 class="contact__label">Větrníkovo s.r.o.</h3>
+                    <p>IČO 24899976</p>
+                </div>
+
+                <div class="contact__block">
+                    <h3 class="contact__label">Otevírací doba</h3>
+                    <p>Po – Pá: 8:00 – 17:00</p>
+                    <p>So – Ne: zavřeno</p>
+                </div>
+
+                <div class="contact__block">
+                    <h3 class="contact__label">Adresa</h3>
+                    <p>Komunardů 1490/47</p>
+                    <p>170 00 Praha, Holešovice</p>
+                </div>
+
+                <div class="contact__block">
+                    <h3 class="contact__label">Telefon</h3>
+                    <p><a href="tel:+420734712172" class="contact__link">+420 734 712 172</a></p>
+                </div>
+
+                <div class="contact__block">
+                    <h3 class="contact__label">E-mail</h3>
+                    <p><a href="mailto:info@vetrnikovo.cz" class="contact__link">info@vetrnikovo.cz</a></p>
+                </div>
+            </div>
+
+            <div class="contact__map">
+                <iframe
+                    src="https://www.google.com/maps?q=V%C4%9Btrn%C3%ADkovo,+Komunard%C5%AF+1490/47,+Praha&output=embed"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" title="Větrníkovo na mapě">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const menuCloseBtn = document.getElementById('menu-close-btn');
+        const slideMenu = document.getElementById('slide-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        function openMenu() {
+            slideMenu.classList.add('is-open');
+            menuOverlay.classList.add('is-visible');
+            hamburgerBtn.classList.add('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            slideMenu.classList.remove('is-open');
+            menuOverlay.classList.remove('is-visible');
+            hamburgerBtn.classList.remove('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        menuCloseBtn.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        document.querySelectorAll('.slide-menu__link').forEach(function (link) {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
 
 </body>
+
 </html>
