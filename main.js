@@ -205,39 +205,67 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
 
-        // Support for O nás page (.about-gallery__item)
-        const aboutGalleryItems = Array.from(document.querySelectorAll('.about-gallery__item img'));
-        if (aboutGalleryItems.length > 0) {
-            const photos = aboutGalleryItems.map(function (img) {
-                return { src: img.src, alt: img.alt };
-            });
-            aboutGalleryItems.forEach(function (img, i) {
-                img.addEventListener('click', function () {
-                    openGallery(photos, i);
-                });
-            });
-        }
-
-        // Support for Galerie page (.gallery-album cards)
-        const albumCards = document.querySelectorAll('.gallery-album');
-        albumCards.forEach(function (card) {
-            const albumImgs = Array.from(card.querySelectorAll('.gallery-album__items img'));
-            const photos = albumImgs.map(function (img) {
-                return { src: img.src, alt: img.alt };
-            });
-
-            function openThisAlbum() {
-                openGallery(photos, 0);
+        // ── Dynamic album loading from /api/photos ──
+        var albumsContainer = document.getElementById('gallery-albums');
+        if (albumsContainer) {
+            // Czech plural helper for "fotografie"
+            function photoCountLabel(n) {
+                if (n === 1) return n + ' fotografie';
+                if (n >= 2 && n <= 4) return n + ' fotografie';
+                return n + ' fotografií';
             }
 
-            card.addEventListener('click', openThisAlbum);
-            card.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openThisAlbum();
-                }
-            });
-        });
+
+            fetch('photos/gallery.json')
+                .then(function (res) { return res.json(); })
+                .then(function (albums) {
+                    albums.forEach(function (album) {
+                        var title = album.title || album.name;
+
+                        var article = document.createElement('article');
+                        article.className = 'gallery-album';
+                        article.setAttribute('data-album', album.name);
+                        article.setAttribute('tabindex', '0');
+                        article.setAttribute('role', 'button');
+                        article.setAttribute('aria-label', 'Otevřít galerii: ' + title);
+
+                        article.innerHTML =
+                            '<div class="gallery-album__media">' +
+                                '<img src="' + album.cover + '" alt="' + title + '" class="gallery-album__bg" loading="lazy">' +
+                            '</div>' +
+                            '<div class="gallery-album__overlay"></div>' +
+                            '<div class="gallery-album__content">' +
+                                '<h2 class="gallery-album__title">' + title + '</h2>' +
+                                '<span class="gallery-album__badge">' + photoCountLabel(album.count) + '</span>' +
+                            '</div>';
+
+                        // Prepare photo objects for lightbox (using alt derived from filename)
+                        var photos = album.photos.map(function (item) {
+                            if (typeof item === 'string') {
+                                return { src: item, alt: title };
+                            }
+                            return { src: item.src, alt: item.alt || title };
+                        });
+
+                        function openThisAlbum() {
+                            openGallery(photos, 0);
+                        }
+
+                        article.addEventListener('click', openThisAlbum);
+                        article.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                openThisAlbum();
+                            }
+                        });
+
+                        albumsContainer.appendChild(article);
+                    });
+                })
+                .catch(function (err) {
+                    console.error('Chyba při načítání alb:', err);
+                });
+        }
 
         if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
         if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);

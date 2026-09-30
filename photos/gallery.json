@@ -1,0 +1,54 @@
+[
+  {
+    "name": "nabidka",
+    "title": "Nabídka",
+    "cover": "photos/gallery/nabidka/nabidka-1.jpeg",
+    "count": 5,
+    "photos": [
+      {
+        "src": "photos/gallery/nabidka/nabidka-1.jpeg",
+        "alt": "Nabídka 1"
+      },
+      {
+        "src": "photos/gallery/nabidka/nabidka-2.jpeg",
+        "alt": "Nabídka 2"
+      },
+      {
+        "src": "photos/gallery/nabidka/nabidka-3.jpeg",
+        "alt": "Nabídka 3"
+      },
+      {
+        "src": "photos/gallery/nabidka/nabidka-4.jpeg",
+        "alt": "Nabídka 4"
+      },
+      {
+        "src": "photos/gallery/nabidka/nabidka-5.jpeg",
+        "alt": "Nabídka 5"
+      }
+    ]
+  },
+  {
+    "name": "rekonstrukce",
+    "title": "Rekonstrukce",
+    "cover": "photos/gallery/rekonstrukce/rekonstrukce-1.jpg",
+    "count": 4,
+    "photos": [
+      {
+        "src": "photos/gallery/rekonstrukce/rekonstrukce-1.jpg",
+        "alt": "Rekonstrukce 1"
+      },
+      {
+        "src": "photos/gallery/rekonstrukce/rekonstrukce-2.jpg",
+        "alt": "Rekonstrukce 2"
+      },
+      {
+        "src": "photos/gallery/rekonstrukce/rekonstrukce-3.jpg",
+        "alt": "Rekonstrukce 3"
+      },
+      {
+        "src": "photos/gallery/rekonstrukce/rekonstrukce-4.jpg",
+        "alt": "Rekonstrukce 4"
+      }
+    ]
+  }
+]
