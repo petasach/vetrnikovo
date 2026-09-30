@@ -1,4 +1,4 @@
-name: Update Gallery JSON
+name: Update Gallery HTML
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  build-gallery:
+  update-gallery:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,12 +22,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Generate gallery.json
+      - name: Update galerie.html
         run: python generate_gallery.py
 
       - name: Commit and push changes if updated
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add photos/gallery.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate gallery.json [skip ci]" && git push)
+          git add galerie.html
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update galerie.html [skip ci]" && git push)
